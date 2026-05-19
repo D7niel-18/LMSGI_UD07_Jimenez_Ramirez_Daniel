@@ -2,6 +2,8 @@
 <t t-name="account.report_invoice_document">
     <t t-call="web.external_layout">
         <t t-set="o" t-value="o.with_context(lang=lang)"/>
+        <!-- Alias limpio para usar t-field con los campos del documento -->
+        <t t-set="doc" t-value="o"/>
         <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/> <!-- Para que aparezca en el pie de página del informe en lugar del NIF de la empresa, si así se ha configurado -->
         <div class="row">
             <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
@@ -116,18 +118,20 @@
                             <t name="proforma_vendor_bill_title">Proforma Vendor Bill</t>
                         </span>
                     </t>
-                    <span t-if="o.name and o.name != '/'" t-field="o.name">INV/2023/0001</span>
+                    <!-- Nombre del documento: número de factura enlazado con t-field -->
+                    <span t-if="doc.name and doc.name != '/'" t-field="doc.name">INV/2023/0001</span>
                 </t>
                 <div class="oe_structure"/>
-                <div id="informations" class="row mb-4" t-if="o.invoice_date or (o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted') or o.delivery_date or o.invoice_origin or o.partner_id.ref or o.ref or o.invoice_incoterm_id">
-                    <div class="col" t-if="o.invoice_date" name="invoice_date">
-                        <t t-if="o.move_type == 'out_invoice'"><strong>Fecha de factura</strong></t>
-                        <t t-elif="o.move_type == 'out_refund'"><strong>Fecha de nota de crédito</strong></t>
-                        <t t-elif="o.move_type == 'out_receipt'"><strong>Fecha de recibo</strong></t>
+                <div id="informations" class="row mb-4" t-if="doc.invoice_date or (doc.invoice_date_due and doc.move_type == 'out_invoice' and doc.state == 'posted') or doc.delivery_date or doc.invoice_origin or doc.partner_id.ref or doc.ref or doc.invoice_incoterm_id">
+                    <div class="col" t-if="doc.invoice_date" name="invoice_date">
+                        <t t-if="doc.move_type == 'out_invoice'"><strong>Fecha de factura</strong></t>
+                        <t t-elif="doc.move_type == 'out_refund'"><strong>Fecha de nota de crédito</strong></t>
+                        <t t-elif="doc.move_type == 'out_receipt'"><strong>Fecha de recibo</strong></t>
                         <t t-else=""><strong>Fecha</strong></t>
-                        <div t-field="o.invoice_date">2023-09-12</div>
+                        <!-- Fecha del documento mostrada con t-field para formateo automático -->
+                        <div t-field="doc.invoice_date">2023-09-12</div>
                     </div>
-                    <div class="col" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                    <div class="col" t-if="doc.invoice_date_due and doc.move_type == 'out_invoice' and doc.state == 'posted'" name="due_date">
                         <strong>Fecha de vencimiento</strong>
                         <div t-field="o.invoice_date_due">2023-10-31</div>
                     </div>
@@ -160,8 +164,9 @@
                         <div t-else="" t-field="o.invoice_incoterm_id.code" class="m-0"/>
                     </div>
                 </div>
-                
-                <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
+
+                <!-- Comprueba si alguna línea de producto tiene descuento para mostrar u ocultar la columna Desc.% -->
+                <t t-set="display_discount" t-value="any(line.discount for line in o.invoice_line_ids if line.display_type == 'product')"/>
                 <t t-set="display_taxes" t-value="any(l.tax_ids for l in o.invoice_line_ids)"/>
                 <div class="oe_structure"/>
                 <t t-set="has_long_desc" t-value="any(line.name and line.name.count('\n') &gt; 30 for line in o.invoice_line_ids if line.name)"/>
@@ -182,10 +187,13 @@
                     </thead>
                     <tbody class="invoice_tbody">
                         <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                        <!-- Se invoca un método del modelo (_get_move_lines_to_report) que filtra y 
+                            ordena las líneas de la factura (invoice_line_ids) según reglas de negocio. -->
                         <t t-set="lines_to_report" t-value="o._get_move_lines_to_report()"/>
                         <t t-set="current_section" t-value="None"/>
                         <t t-set="current_subsection" t-value="None"/>
-                        
+                        <!-- Itera sobre cada línea devuelta por el método anterior.
+                        Por cada iteración se determina el tipo de línea (display_type): line_section, line_subsection, line_note, product. -->
                         <t t-foreach="lines_to_report" t-as="line">
                             <t t-set="is_note" t-value="line.display_type == 'line_note'"/>
                             <t t-set="is_section" t-value="line.display_type == 'line_section'"/>
@@ -262,6 +270,8 @@
                             </t>
                             <t t-else="">
                                 <t t-set="grouped_lines" t-value="line._get_child_lines()"/>
+                                <!-- Este bucle despliega las líneas agrupadas de una línea que tiene 
+                                    colapso activo, manteniendo la estructura pero omitiendo detalles de precios o cantidades según corresponda. -->
                                 <t t-foreach="grouped_lines" t-as="grouped_line">
                                     <t t-if="grouped_line['display_type'] == 'product' or hide_details">
                                         <t t-set="line_colspan" t-value="1"/>
@@ -330,11 +340,17 @@
                         <div id="total" class="clearfix row">
                             <div class="ms-auto">
                                 <table class="o_total_table table table-borderless avoid-page-break-inside">
-                                    
+                                    <tr class="fw-bold">
+                                        <td>Total neto</td>
+                                        <td class="text-end">
+                                            <!-- Total neto del documento mostrado como moneda -->
+                                            <span t-field="doc.amount_total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                        </td>
+                                    </tr>
                                     <!-- Resumen de totales fiscales (moneda de la factura) -->
-                                    <t t-if="o.tax_totals" t-call="account.document_tax_totals">
-                                        <t t-set="tax_totals" t-value="o.tax_totals"/>
-                                        <t t-set="currency" t-value="o.currency_id"/>
+                                    <t t-if="doc.tax_totals" t-call="account.document_tax_totals">
+                                        <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                                        <t t-set="currency" t-value="doc.currency_id"/>
                                     </t>
                                     
                                     <!--Pagos-->
