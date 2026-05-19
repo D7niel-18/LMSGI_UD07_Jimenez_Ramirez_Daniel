@@ -1,1 +1,0 @@
-# LMSGI_UD07_Jimenez_Ramirez_Daniel
