@@ -1,133 +1,19 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rsm:CrossIndustryInvoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100">
-    <rsm:ExchangedDocumentContext>
-        <ram:GuidelineSpecifiedDocumentContextParameter>
-            <ram:ID>urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended</ram:ID>
-        </ram:GuidelineSpecifiedDocumentContextParameter>
-    </rsm:ExchangedDocumentContext>
-    <rsm:ExchangedDocument>
-        <ram:ID>INV/2026/00001</ram:ID>
-        <ram:TypeCode>380</ram:TypeCode>
-        <ram:IssueDateTime>
-            <udt:DateTimeString format="102">20260519</udt:DateTimeString>
-        </ram:IssueDateTime>
-    </rsm:ExchangedDocument>
-    <rsm:SupplyChainTradeTransaction>
-        <ram:IncludedSupplyChainTradeLineItem>
-            <ram:AssociatedDocumentLineDocument>
-                <ram:LineID>1</ram:LineID>
-            </ram:AssociatedDocumentLineDocument>
-            <ram:SpecifiedTradeProduct>
-                <ram:Name>Escalera metalica</ram:Name>
-            </ram:SpecifiedTradeProduct>
-            <ram:SpecifiedLineTradeAgreement>
-                <ram:GrossPriceProductTradePrice>
-                    <ram:ChargeAmount>80.00</ram:ChargeAmount>
-                </ram:GrossPriceProductTradePrice>
-                <ram:NetPriceProductTradePrice>
-                    <ram:ChargeAmount>80.00</ram:ChargeAmount>
-                </ram:NetPriceProductTradePrice>
-            </ram:SpecifiedLineTradeAgreement>
-            <ram:SpecifiedLineTradeDelivery>
-                <ram:BilledQuantity unitCode="C62">1.0</ram:BilledQuantity>
-            </ram:SpecifiedLineTradeDelivery>
-            <ram:SpecifiedLineTradeSettlement>
-                <ram:ApplicableTradeTax>
-                    <ram:TypeCode>VAT</ram:TypeCode>
-                    <ram:CategoryCode>E</ram:CategoryCode>
-                    <ram:RateApplicablePercent>0.0</ram:RateApplicablePercent>
-                </ram:ApplicableTradeTax>
-                <ram:SpecifiedTradeSettlementLineMonetarySummation>
-                    <ram:LineTotalAmount>80.00</ram:LineTotalAmount>
-                </ram:SpecifiedTradeSettlementLineMonetarySummation>
-            </ram:SpecifiedLineTradeSettlement>
-        </ram:IncludedSupplyChainTradeLineItem>
-        <ram:ApplicableHeaderTradeAgreement>
-            <ram:SellerTradeParty>
-                <ram:Name>My Company</ram:Name>
-                <ram:DefinedTradeContact>
-                    <ram:PersonName>My Company</ram:PersonName>
-                </ram:DefinedTradeContact>
-                <ram:PostalTradeAddress>
-                    <ram:CountryID>US</ram:CountryID>
-                </ram:PostalTradeAddress>
-            </ram:SellerTradeParty>
-            <ram:BuyerTradeParty>
-                <ram:Name>Carlos Ruiz</ram:Name>
-                <ram:DefinedTradeContact>
-                    <ram:PersonName>Carlos Ruiz</ram:PersonName>
-                    <ram:TelephoneUniversalCommunication>
-                        <ram:CompleteNumber>+34 699 111 222</ram:CompleteNumber>
-                    </ram:TelephoneUniversalCommunication>
-                    <ram:EmailURIUniversalCommunication>
-                        <ram:URIID>cruiz.dev@ejemplo.com</ram:URIID>
-                    </ram:EmailURIUniversalCommunication>
-                </ram:DefinedTradeContact>
-                <ram:PostalTradeAddress>
-                    <ram:CityName>Valencia</ram:CityName>
-                    <ram:CountryID>ES</ram:CountryID>
-                </ram:PostalTradeAddress>
-            </ram:BuyerTradeParty>
-            <ram:BuyerOrderReferencedDocument>
-                <ram:IssuerAssignedID>INV/2026/00001</ram:IssuerAssignedID>
-            </ram:BuyerOrderReferencedDocument>
-        </ram:ApplicableHeaderTradeAgreement>
-        <ram:ApplicableHeaderTradeDelivery>
-            <ram:ShipToTradeParty>
-                <ram:Name>Carlos Ruiz</ram:Name>
-                <ram:DefinedTradeContact>
-                    <ram:PersonName>Carlos Ruiz</ram:PersonName>
-                    <ram:TelephoneUniversalCommunication>
-                        <ram:CompleteNumber>+34 699 111 222</ram:CompleteNumber>
-                    </ram:TelephoneUniversalCommunication>
-                    <ram:EmailURIUniversalCommunication>
-                        <ram:URIID>cruiz.dev@ejemplo.com</ram:URIID>
-                    </ram:EmailURIUniversalCommunication>
-                </ram:DefinedTradeContact>
-                <ram:PostalTradeAddress>
-                    <ram:CityName>Valencia</ram:CityName>
-                    <ram:CountryID>ES</ram:CountryID>
-                </ram:PostalTradeAddress>
-            </ram:ShipToTradeParty>
-            <ram:ActualDeliverySupplyChainEvent>
-                <ram:OccurrenceDateTime>
-                    <udt:DateTimeString format="102">20260519</udt:DateTimeString>
-                </ram:OccurrenceDateTime>
-            </ram:ActualDeliverySupplyChainEvent>
-        </ram:ApplicableHeaderTradeDelivery>
-        <ram:ApplicableHeaderTradeSettlement>
-            <ram:PaymentReference>INV/2026/00001</ram:PaymentReference>
-            <ram:InvoiceCurrencyCode>USD</ram:InvoiceCurrencyCode>
-            <ram:ApplicableTradeTax>
-                <ram:CalculatedAmount>0.00</ram:CalculatedAmount>
-                <ram:TypeCode>VAT</ram:TypeCode>
-                <ram:ExemptionReason>Exención fiscal</ram:ExemptionReason>
-                <ram:BasisAmount>80.00</ram:BasisAmount>
-                <ram:CategoryCode>E</ram:CategoryCode>
-                <ram:DueDateTypeCode>5</ram:DueDateTypeCode>
-                <ram:RateApplicablePercent>0.0</ram:RateApplicablePercent>
-            </ram:ApplicableTradeTax>
-            <ram:BillingSpecifiedPeriod>
-                <ram:StartDateTime>
-                    <udt:DateTimeString format="102">20260519</udt:DateTimeString>
-                </ram:StartDateTime>
-                <ram:EndDateTime>
-                    <udt:DateTimeString format="102">20260519</udt:DateTimeString>
-                </ram:EndDateTime>
-            </ram:BillingSpecifiedPeriod>
-            <ram:SpecifiedTradePaymentTerms>
-                <ram:DueDateDateTime>
-                    <udt:DateTimeString format="102">20260519</udt:DateTimeString>
-                </ram:DueDateDateTime>
-            </ram:SpecifiedTradePaymentTerms>
-            <ram:SpecifiedTradeSettlementHeaderMonetarySummation>
-                <ram:LineTotalAmount>80.00</ram:LineTotalAmount>
-                <ram:TaxBasisTotalAmount>80.00</ram:TaxBasisTotalAmount>
-                <ram:TaxTotalAmount currencyID="USD">0.00</ram:TaxTotalAmount>
-                <ram:GrandTotalAmount>80.00</ram:GrandTotalAmount>
-                <ram:TotalPrepaidAmount>0.00</ram:TotalPrepaidAmount>
-                <ram:DuePayableAmount>80.00</ram:DuePayableAmount>
-            </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
-        </ram:ApplicableHeaderTradeSettlement>
-    </rsm:SupplyChainTradeTransaction>
-</rsm:CrossIndustryInvoice>
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents">
+    
+    <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017</cbc:CustomizationID>
+    
+    <cbc:ID>FACT-2026-0009</cbc:ID>
+    <cbc:IssueDate>2026-05-21</cbc:IssueDate>
+    
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>WillmanTech</cbc:Name>
+            </cac:PartyName>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    
+</Invoice>
