@@ -72,8 +72,8 @@ Con el comando docker compose -d up
 ## 3. Seguridad y Control de Acceso
 El sistema tiene tres tipos de usuario:
 
-**Administrador**: Configurar el sistema, crear usuarios, ver todos los datos
-**Contable**: Crear y validar facturas, ver informes. No puede tocar la configuración
+**Administrador**: Configurar el sistema, crear usuarios, ver todos los datos <br>
+**Contable**: Crear y validar facturas, ver informes. No puede tocar la configuración <br>
 **Comercial**: Gestionar clientes y pedidos de venta. No ve la contabilidad
 
 ### Política de contraseñas
@@ -102,9 +102,9 @@ Primero debemos para el contenedor y luego
 Para restaurar la base de datos necesitamos el siguiente comando:
 psql -h localhost -U usuario_postgres -d nombre_base_datos -f ruta/al/archivo.sql
 
-**-h:** La dirección del servidor
-**-U:** El usuario
-**-d:** El nombre de la base de datos destino que creaste en la fase previa.
+**-h:** La dirección del servidor <br>
+**-U:** El usuario <br>
+**-d:** El nombre de la base de datos destino que creaste en la fase previa. <br>
 **-f:** La ruta exacta donde se encuentra guardado tu archivo .sql
 
 Y volvemos a arrancar
@@ -136,4 +136,3 @@ wkhtmltopdf convierte ese HTML a PDF (como si lo imprimiera un navegador)
 El PDF llega al usuario listo para descargar o enviar por correo
 ```
 wkhtmltopdf es una herramienta de código abierto de línea de comandos que permite convertir páginas web o archivos HTML directamente a formato PDF o imágenes
-```
