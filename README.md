@@ -1,6 +1,6 @@
 # Manual de Explotación — WillmanTech S.L.
 
-**Fecha:** 21-05-2026
+**Fecha:** 21-05-2026 <br>
 **Norma usada:** ISO/IEC/IEEE 26514:2022
 
 ---
@@ -117,7 +117,7 @@ Y volvemos a arrancar
 
 1. Ir a **Facturación → Clientes → Facturas → Nuevo**
 2. Seleccionar el cliente y rellenar las líneas (producto, cantidad, precio)
-3. Pulsar **Confirmar** — la factura recibe un número definitivo (ej: `FACT/2026/00001`)
+3. Pulsar **Confirmar** — la factura recibe un número definitivo (ej: `FACT-2026-0009`)
 4. Pulsar **Imprimir** para obtener el PDF
 
 ### Cómo se genera el PDF (pipeline)
