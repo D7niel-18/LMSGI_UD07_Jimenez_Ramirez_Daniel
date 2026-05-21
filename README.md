@@ -89,10 +89,10 @@ Para crear un usuario: **Ajustes → Usuarios → Nuevo**, rellenar los datos y 
 
 ### Hacer una copia de seguridad
 Para realizar la copia de seguridad de la base de datos en POSTGRESQL tenemos que poner el siguiente comando
-pg_dump -U postgres -d db12 > backup.sql
+pg_dump -U postgres -d db12 > backup.sql <br>
 
-**-U**: Indicamos el usuario de la base de datos
-**-d**: Indicamos la base de datos
+**-U**: Indicamos el usuario de la base de datos <br>
+**-d**: Indicamos la base de datos <br>
 **> backup.sql**: Le decimos que lo meta en un archivo .sql
 
 ### Restaurar una copia de seguridad
