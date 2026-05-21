@@ -4,7 +4,6 @@
 **Norma usada:** ISO/IEC/IEEE 26514:2022
 
 ---
-
 ## 1. Introducción y Arquitectura
 
 WillmanTech S.L. usa un ERP para gestionar sus ventas, facturas y clientes. El sistema corre en dos contenedores Docker que se levantan juntos con Docker Compose:
@@ -25,6 +24,7 @@ Los módulos activos en el sistema son: `account` (facturación), `sale` (ventas
 ### Pasos
 
 **1.** Crear el fichero docker-compose.yml
+
 ```
 services:  # Define los servicios que se van a ejecutar
 
@@ -63,19 +63,18 @@ volumes:  # Definición de volúmenes persistentes
   odoo-data:  # Volumen para almacenar datos de Odoo
   db-data:  # Volumen para almacenar datos de PostgreSQL
 ```
+
 **2.** Levantar el contenedor
 Con el comando docker compose -d up
+
 ---
 
 ## 3. Seguridad y Control de Acceso
-
 El sistema tiene tres tipos de usuario:
 
-| Rol | Qué puede hacer |
-|---|---|
-| **Administrador** | Todo: configurar el sistema, crear usuarios, ver todos los datos |
-| **Contable** | Crear y validar facturas, ver informes. No puede tocar la configuración |
-| **Comercial** | Gestionar clientes y pedidos de venta. No ve la contabilidad |
+**Administrador**: Configurar el sistema, crear usuarios, ver todos los datos
+**Contable**: Crear y validar facturas, ver informes. No puede tocar la configuración
+**Comercial**: Gestionar clientes y pedidos de venta. No ve la contabilidad
 
 ### Política de contraseñas
 - Mínimo 10 caracteres con mayúsculas, minúsculas, números y símbolos
@@ -109,6 +108,7 @@ psql -h localhost -U usuario_postgres -d nombre_base_datos -f ruta/al/archivo.sq
 **-f:** La ruta exacta donde se encuentra guardado tu archivo .sql
 
 Y volvemos a arrancar
+
 ---
 
 ## 5. Flujo de Facturación y Generación de PDF
